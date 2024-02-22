@@ -55,7 +55,7 @@ resource "aws_ecs_task_definition" "taskECSproyFinal" {
 resource "aws_ecs_service" "srvECSproyFinal" {
   name            = "srvECSproyFinal"
   cluster         = aws_ecs_cluster.ecsProyFinal.id
-  task_definition = aws_ecs_task_definition.app.arn
+  task_definition = aws_ecs_task_definition.taskECSproyFinal.arn
   desired_count   = 2
   network_configuration {
     security_groups = [aws_security_group.ecs_sg_ProyFinal.id]
