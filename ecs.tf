@@ -61,7 +61,6 @@ resource "aws_ecs_service" "srvECSproyFinal" {
     security_groups = [aws_security_group.ecs_sg_ProyFinal.id]
     subnets         = ["aws_subnet.subnetProyFinal1.id" , "aws_subnet.subnetProyFinal2.id"]
   }
-
   lifecycle {
     ignore_changes = [desired_count]
   }
