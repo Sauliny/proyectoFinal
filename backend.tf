@@ -4,8 +4,8 @@
 ##################################################################
 terraform {
   backend "s3" {
-    bucket = "bucketTfstateProyFinal"
-    key    = "bucketTfstateProyFinal.tfstate"
+    bucket = "buckettfstateproyfinal"
+    key    = "buckettfstateproyfinal.tfstate"
     region = "us-east-1"
   }
 }
