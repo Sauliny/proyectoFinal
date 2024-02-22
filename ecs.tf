@@ -47,15 +47,7 @@ resource "aws_ecs_task_definition" "taskECSproyFinal" {
     environment = [
       { name = "EXAMPLE SE", value = "example SE" }
     ]
-/*    logConfiguration = {
-      logDriver = "awslogs",
-      options = {
-        "awslogs-region"        = "us-east-1",
-        "awslogs-group"         = aws_cloudwatch_log_group.ecs.name,
-        "awslogs-stream-prefix" = "app"
-      }
-    },
-*/
+
   }])
 }
 
@@ -67,19 +59,9 @@ resource "aws_ecs_service" "srvECSproyFinal" {
   desired_count   = 2
   network_configuration {
     security_groups = [aws_security_group.ecs_sg_ProyFinal.id]
-    subnets         = aws_subnet.subnetProyFinal[*].id
+    subnets         = ["aws_subnet.subnetProyFinal1.id" , "aws_subnet.subnetProyFinal2.id"]
   }
-/*
-  capacity_provider_strategy {
-    capacity_provider = aws_ecs_capacity_provider.main.name
-    base              = 1
-    weight            = 100
-  }
-  ordered_placement_strategy {
-    type  = "spread"
-    field = "attribute:ecs.availability-zone"
-  }
-*/
+
   lifecycle {
     ignore_changes = [desired_count]
   }
