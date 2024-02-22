@@ -1,6 +1,6 @@
 ################################################################
 ## Archivo de configuración de Networking - Proyecto Final SE ##
-## networking.tf					      ##
+## networking.tf					                                    ##
 ################################################################
 
 # Creación de VPC en AWS para el Proyecto Final
@@ -12,22 +12,22 @@ resource "aws_vpc" "vpcProyFinal" {
 }
 
 # Creación de Subred1 en AWS para el Proyecto Final
-resource "aws_subnet" "subnet1ProyFinal" {
+resource "aws_subnet" "subnetProyFinal1" {
   vpc_id                  = aws_vpc.vpcProyFinal.id
   cidr_block              = "40.0.0.0/28"
   availability_zone       = "us-east-1a"
   tags = {
-    Name = "subnet1ProyFinal"
+    Name = "subnetProyFinal1"
   }
 }
 
 # Creación de Subred2 en AWS para el Proyecto Final
-resource "aws_subnet" "subnet2ProyFinal" {
+resource "aws_subnet" "subnetProyFinal2" {
   vpc_id                  = aws_vpc.vpcProyFinal.id
   cidr_block              = "40.0.0.16/28"
   availability_zone       = "us-east-1b"
   tags = {
-    Name = "subnet2ProyFinal"
+    Name = "subnetProyFinal2"
   }
 }
 
@@ -45,8 +45,8 @@ resource "aws_route_table" "rtProyFinal" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igwProyFinal.id
-	tags = {
-      Name = "igwProyFinal"
-	}
+  }
+  tags = {
+    Name = "rtProyFinal"
   }
 }
