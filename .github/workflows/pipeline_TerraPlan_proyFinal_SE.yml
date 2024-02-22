@@ -1,0 +1,24 @@
+#############################################
+# Pipeline para ejecutar el Terraform Plan ##
+#############################################
+name: pipeline_TerraPlan_proyFinal
+on:
+    pull_request:
+        branches:
+            - main     # Se configura asi para hacer pull request a la rama main
+
+jobs:
+    jobTerra:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v3
+        - name: Configure AWS Credentials For GitHub Actions
+          uses: aws-actions/configure-aws-credentials@v2
+          with:
+                aws-access-key-id: ${{ secrets.ACCESS_KEY_AWS }}        # Secreto Generado en AWS
+                aws-secret-access-key: ${{ secrets.SECRET_KEY_AWS }}    # Clave del Secreto Generado en AWS
+                aws-region: us-east-1
+        - name: ejecutar #  Comandos para ejecutar de Terraform
+          run: |
+                terraform init  
+                terraform plan
