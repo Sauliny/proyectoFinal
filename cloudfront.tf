@@ -24,25 +24,20 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_access_control_id = aws_cloudfront_origin_access_control.OAC_ProyFinal.id
     origin_id                = local.s3_origin_id
   }
-
   enabled             = true
   is_ipv6_enabled     = true
   comment             = "Some comment"
   default_root_object = "index.html"
-
   logging_config {
     include_cookies = false
     bucket          = "mylogs.s3.amazonaws.com"
     prefix          = "myprefix"
   }
-
   aliases = ["mysite.example.com", "yoursite.example.com"]
-
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
-
     forwarded_values {
       query_string = false
 
@@ -50,7 +45,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
         forward = "none"
       }
     }
-
     viewer_protocol_policy = "allow-all"
     min_ttl                = 0
     default_ttl            = 3600
@@ -118,4 +112,32 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
+}
+
+## Se configura el aws_s3_bucket_policy ##
+resource "aws_s3_bucket_policy" "my_bucket_policy" {
+  bucket = aws_s3_bucket.cf-s3-proyfinal.id
+
+  policy = jsonencode(
+    {
+        "Version": "2008-10-17",
+        "Id": "PolicyForCloudFrontPrivateContent",
+        "Statement": [
+            {
+                "Sid": "AllowCloudFrontServicePrincipal",
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": "cloudfront.amazonaws.com"
+                },
+                "Action": "s3:GetObject",
+                "Resource": "arn:aws:s3:::vivi-web-component-dev/*",
+                "Condition": {
+                    "StringEquals": {
+                        "AWS:SourceArn": "arn:aws:cloudfront::437209357514:distribution/E21N71EARA5PM5"
+                    }
+                }
+            }
+        ]
+    }
+  )
 }

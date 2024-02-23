@@ -51,6 +51,11 @@ resource "aws_ecs_service" "srvECSproyFinal" {
     subnets           = [aws_subnet.subnetproyfinal1.id , aws_subnet.subnetproyfinal2.id]
     assign_public_ip  = true
   }
+  load_balancer {
+    target_group_arn = aws_lb_target_group.lb-tg-proyfinal.arn
+    container_name   = "conteinerProyFinal"
+    container_port   = 8080
+  }
   lifecycle {
     ignore_changes = [desired_count]
   }
