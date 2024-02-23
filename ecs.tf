@@ -11,24 +11,6 @@ resource "aws_ecs_cluster" "ecsProyFinal" {
   }
 }
 
-## Configurar Grupo de Seguridad para ECS
-resource "aws_security_group" "ecs_sg_ProyFinal" {
-  name_prefix = "ecs_sg_ProyFinal"
-  description = "Allow all traffic within the VPC"
-  vpc_id      = aws_vpc.vpcProyFinal.id
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = [aws_vpc.vpcProyFinal.cidr_block]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
 
 ## Configurar Tarea para ECS
 resource "aws_ecs_task_definition" "taskECSproyFinal" {
@@ -65,4 +47,6 @@ resource "aws_ecs_service" "srvECSproyFinal" {
     ignore_changes = [desired_count]
   }
 }
+
+
 
