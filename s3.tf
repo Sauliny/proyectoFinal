@@ -14,10 +14,10 @@ resource "aws_s3_bucket" "cf-s3-proyfinal" {
 
 ## Se configura el aws_s3_bucket_policy para Cloudfront en AWS
 
-resource "aws_s3_bucket_policy" "bucket_policy_py" {
-  bucket = aws_s3_bucket.cf-s3-proyfinal.id
-  policy = data.aws_iam_policy_document.policy_docu_pf.json
-}
+# resource "aws_s3_bucket_policy" "bucket_policy_py" {
+#   bucket = aws_s3_bucket.cf-s3-proyfinal.id
+#   policy = data.aws_iam_policy_document.policy_docu_pf.json
+# }
 
 ## Revisar este codigo: DATA
 data "aws_iam_policy_document" "policy_docu_pf" {
