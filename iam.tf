@@ -21,6 +21,26 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy_ProyFinal" {
   policy = data.aws_iam_policy_document.s3_iam_policy_ProyFinal.json
 }
 
+# Se crea aws_iam_role_policy
+
+resource "aws_iam_role_policy" "ecs_iam_role_policy" {
+  name = "ecs_iam_role_policy"
+  role = aws_iam_role.ecs_task_execution_role.id
+  policy = jsonencode({
+    Version ="2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
+
 # Se crea ecs_task_execution_role
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "role-name"
