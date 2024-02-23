@@ -59,7 +59,9 @@ resource "aws_ecs_service" "srvECSproyFinal" {
     container_name   = "conteinerProyFinal"
     container_port   = 8080
   }
+  /*
   lifecycle {
     ignore_changes = [desired_count]
   }
+*/  
 }
