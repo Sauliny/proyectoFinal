@@ -4,8 +4,8 @@
 ## ecr.tf                                                 ##
 ############################################################
 
-resource "aws_ecr_repository" "ecrProyFinal" {
-  name                 = "registryProyFinal"
+resource "aws_ecr_repository" "ecr-proyfinal" {
+  name                 = "registry-proyfinal"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
