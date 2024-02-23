@@ -16,11 +16,11 @@ resource "aws_s3_bucket" "cf-s3-proyfinal" {
 
 resource "aws_s3_bucket_policy" "bucket_policy_py" {
   bucket = aws_s3_bucket.cf-s3-proyfinal.id
-  policy = data.aws_iam_policy_document.s3_bucket_policy.json
+  policy = data.aws_iam_policy_document.policy_docu_pf.json
 }
 
 ## Revisar este codigo: DATA
-data "aws_iam_policy_document" "coe_s3_web_component_virginia" {
+data "aws_iam_policy_document" "policy_docu_pf" {
   policy_id = "PolicyForCloudFrontPrivateContent"
   version   = "2008-10-17"
   statement {
