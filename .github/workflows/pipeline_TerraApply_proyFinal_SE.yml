@@ -1,3 +1,7 @@
+##############################################
+# Pipeline para ejecutar el Terraform Apply ##
+##############################################
+
 # Pipeline para probar la configuracion de Recursos, los secretos, Push y Apply en AWS para el Proyecto Final.
 name: pipelineTerraApply
 on:
