@@ -51,6 +51,16 @@ resource "aws_route_table" "rtProyFinal" {
   }
 }
 
+# Se crea Rutas Publicas
+resource "aws_route_table_association" "rt_public_1" {
+  subnet_id = aws_subnet.subnetproyfinal1.id
+  route_table_id= aws_route_table.rtProyFinal.id
+}
+resource "aws_route_table_association" "rt_public_2" {
+  subnet_id = aws_subnet.subnetproyfinal2.id
+  route_table_id= aws_route_table.rtProyFinal.id
+}
+
 ## Creación de Grupo de Seguridad en AWS para el Proyecto Final
 resource "aws_security_group" "ecs_sg_ProyFinal" {
   name_prefix = "ecs_sg_ProyFinal"
