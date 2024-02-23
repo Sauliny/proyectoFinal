@@ -77,7 +77,7 @@ resource "aws_lb" "lbProyFinal" {
   name               = "loadBalancer-ProyFinal"
   internal           = false
   load_balancer_type = "network"
-  subnets            = [aws_subnet.subnetProyFinal1.id,aws_subnet.subnetProyFinal2.id]
+  subnets            = [aws_subnet.subnetproyfinal1.id,aws_subnet.subnetproyfinal2.id]
   enable_deletion_protection = true
     tags = {
     Environment = "Test Saulo"
