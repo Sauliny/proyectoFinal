@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "task-ecs-proyfinal" {
 
 ## Se configura el Servicio para ECS
 resource "aws_ecs_service" "srv-ecs-proyfinal" {
-  name            = "srvECSproyFinal"
+  name            = "srv-ecs-proyfinal"
   cluster         = aws_ecs_cluster.ecsProyFinal.id
   task_definition = aws_ecs_task_definition.task-ecs-proyfinal.arn
   desired_count   = 2   # cantidad de instancias para ejecutar
