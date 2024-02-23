@@ -52,8 +52,8 @@ resource "aws_ecs_service" "srvECSproyFinal" {
     assign_public_ip  = true
   }
   load_balancer {
-    target_group_arn = aws_lb_target_group.foo.arn
-    container_name   = "myapp"
+    target_group_arn = aws_lb_target_group.lb-tg-proyfinal.arn
+    container_name   = "conteinerProyFinal"
     container_port   = 8080
   }
   lifecycle {
