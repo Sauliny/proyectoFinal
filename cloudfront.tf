@@ -114,6 +114,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 }
 
+/*
 ## Se configura el aws_s3_bucket_policy ##
 resource "aws_s3_bucket_policy" "my_bucket_policy" {
   bucket = aws_s3_bucket.cf-s3-proyfinal.id
@@ -141,3 +142,4 @@ resource "aws_s3_bucket_policy" "my_bucket_policy" {
     }
   )
 }
+*/
