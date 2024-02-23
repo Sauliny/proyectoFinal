@@ -20,17 +20,20 @@ resource "aws_ecs_task_definition" "taskECSproyFinal" {
   cpu                       = "256" # Cantidad de CPU en milicore
   memory                    = "512" # Cantidad de memoria en MiB
   requires_compatibilities  = ["FARGATE"]
-#  task_role_arn      = aws_iam_role.ecs_task_role.arn
-#  execution_role_arn = aws_iam_role.ecs_exec_role.arn
   execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
   container_definitions = jsonencode([
   {
-    name          = "conteinerProyFinal",
-    image         = "${aws_ecr_repository.ecr-proyfinal.repository_url}:latest",
+    name          = "conteinerProyFinal"
+    image         = "708734958673.dkr.ecr.us-east-1.amazonaws.com/registry-proyfinal:latest"
     cpu           = 256 # Cantidad de CPU en milicore
     memory        = 512 # Cantidad de memoria en MiB
-    essential     = true,
-    portMappings  = [{ containerPort = 80, hostPort = 80 }],
+    essential     = true
+    portMappings  = [
+      { 
+        containerPort = 80
+        hostPort = 80 
+      }
+    ]
   }
   ])
 }
