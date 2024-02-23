@@ -23,4 +23,5 @@ resource "aws_s3_bucket_acl" "cf-s3-acl-ProyFinal" {
 ## Se configura el origin para Cloudfront en AWS
 locals {
   s3_origin_id = "myS3Origin"
+#  s3_origin_id = "myS3Origin"
 }
