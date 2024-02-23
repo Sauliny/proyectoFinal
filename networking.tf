@@ -73,7 +73,7 @@ resource "aws_security_group" "ecs_sg_ProyFinal" {
 }
 
 ## Creación de Balanceador de Carga en AWS para el Proyecto Final
-resource "aws_lb" "lbProyFinal" {
+resource "aws_lb" "lb-proyfinal" {
   name               = "loadBalancer-ProyFinal"
   internal           = false
   load_balancer_type = "network"
@@ -85,8 +85,8 @@ resource "aws_lb" "lbProyFinal" {
 }
 
 ## Creación de Target Group del Balanceador de Carga en AWS para el Proyecto Final
-resource "aws_lb_target_group" "lb-tg-ProyFinal" {
-  name        = "lb-tg-ProyFinal"
+resource "aws_lb_target_group" "lb-tg-proyfinal" {
+  name        = "lb-tg-proyfinal"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.vpcProyFinal.id
@@ -95,13 +95,11 @@ resource "aws_lb_target_group" "lb-tg-ProyFinal" {
 
 ## Creación del Listerner del Balanceador de Carga en AWS para el Proyecto Final
 resource "aws_lb_listener" "lstnProyFinal" {
-  load_balancer_arn = aws_lb.lbProyFinal.arn
+  load_balancer_arn = aws_lb.lb-proyfinal.arn
   port              = "80"
   protocol          = "HTTP"
-##ssl_policy        = "ELBSecurityPolicy-2016-08"
-##certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.lb-tg-ProyFinal.arn
+    target_group_arn = aws_lb_target_group.lb-tg-proyfinal.arn
   }
 }
