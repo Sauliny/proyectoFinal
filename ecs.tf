@@ -15,34 +15,41 @@ resource "aws_ecs_cluster" "ecsProyFinal" {
 
 ## Se configura la Tarea para ECS
 resource "aws_ecs_task_definition" "taskECSproyFinal" {
-  family             = "taskECSproyFinal"
+  family                    = "taskECSproyFinal"
+  network_mode              = "awsvpc"
+  cpu                       = "256" # Cantidad de CPU en milicore
+  memory                    = "512" # Cantidad de memoria en MiB
+  requires_compatibilities  = ["FARGATE"]
 #  task_role_arn      = aws_iam_role.ecs_task_role.arn
 #  execution_role_arn = aws_iam_role.ecs_exec_role.arn
-  network_mode       = "awsvpc"
-  cpu                = 256
-  memory             = 256
-  container_definitions = jsonencode([{
-    name         = "app",
-    image        = "${aws_ecr_repository.ecrProyFinal.repository_url}:latest",
-    essential    = true,
-    portMappings = [{ containerPort = 8080, hostPort = 8080 }],
-
-    environment = [
-      { name = "EXAMPLE SE", value = "example SE" }
-    ]
-
-  }])
+  execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+  container_definitions = jsonencode([
+  {
+    name          = "conteinerProyFinal",
+    image         = "${aws_ecr_repository.ecrProyFinal.repository_url}:latest",
+    cpu           = 256 # Cantidad de CPU en milicore
+    memory        = 512 # Cantidad de memoria en MiB
+    essential     = true,
+    portMappings  = [{ containerPort = 80, hostPort = 80 }],
+  }
+  ])
 }
 
-## Se configura el  Servicio para ECS
+## Se configura el Servicio para ECS
 resource "aws_ecs_service" "srvECSproyFinal" {
   name            = "srvECSproyFinal"
   cluster         = aws_ecs_cluster.ecsProyFinal.id
   task_definition = aws_ecs_task_definition.taskECSproyFinal.arn
-  desired_count   = 2
+  desired_count   = 2   # cantidad de instancias para ejecutar
+
+  # Configuración del servicio para Fargate
+  launch_type = "FARGATE"
+  
+   # Configuración de red
   network_configuration {
-    security_groups = [aws_security_group.ecs_sg_ProyFinal.id]
-    subnets         = ["aws_subnet.subnetProyFinal1.id" , "aws_subnet.subnetProyFinal2.id"]
+    security_groups   = [aws_security_group.ecs_sg_ProyFinal.id]
+    subnets           = ["aws_subnet.subnetProyFinal1.id" , "aws_subnet.subnetProyFinal2.id"]
+    assign_public_ip  = true
   }
   lifecycle {
     ignore_changes = [desired_count]
