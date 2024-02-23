@@ -84,12 +84,12 @@ EOF
 # Se crea ecs-task-execution-role-policy-attachment 
 resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
   role       = aws_iam_role.ecs_task_execution_role.name
-# policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-  policy_arn = "arn:aws:iam::708734958673:policy/AdministratorAccess"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+#  policy_arn = "arn:aws:iam::708734958673:policy/AdministratorAccess"
 }
 
 # Se crea task_s3
-resource "aws_iam_role_policy_attachment" "task_s3" {
-  role       = "${aws_iam_role.ecs_task_role.name}"
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-}
+# resource "aws_iam_role_policy_attachment" "task_s3" {
+#   role       = "${aws_iam_role.ecs_task_role.name}"
+#   policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+# }
