@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "taskECSproyFinal" {
   container_definitions = jsonencode([
   {
     name          = "conteinerProyFinal",
-    image         = "${aws_ecr_repository.ecrProyFinal.repository_url}:latest",
+    image         = "${aws_ecr_repository.ecr-proyfinal.repository_url}:latest",
     cpu           = 256 # Cantidad de CPU en milicore
     memory        = 512 # Cantidad de memoria en MiB
     essential     = true,
