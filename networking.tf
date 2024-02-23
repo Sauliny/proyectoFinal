@@ -76,9 +76,10 @@ resource "aws_security_group" "ecs_sg_ProyFinal" {
 resource "aws_lb" "lb-proyfinal" {
   name               = "loadBalancer-ProyFinal"
   internal           = false
-  load_balancer_type = "network"
+  load_balancer_type = "application"
   subnets            = [aws_subnet.subnetproyfinal1.id,aws_subnet.subnetproyfinal2.id]
-  enable_deletion_protection = true
+  security_groups    = [aws_security_group.ecs_sg_ProyFinal.id]
+  enable_deletion_protection = false
     tags = {
     Environment = "Test Saulo"
   }
@@ -97,7 +98,7 @@ resource "aws_lb_target_group" "lb-tg-proyfinal" {
 resource "aws_lb_listener" "lstnProyFinal" {
   load_balancer_arn = aws_lb.lb-proyfinal.arn
   port              = "80"
-  protocol          = "HTTP"
+  protocol          = "TCP"
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.lb-tg-proyfinal.arn
