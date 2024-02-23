@@ -46,7 +46,7 @@ resource "aws_ecs_service" "srv-ecs-proyfinal" {
   task_definition     = aws_ecs_task_definition.task-ecs-proyfinal.arn
   desired_count       = 2   # cantidad de instancias para ejecutar
   iam_role            = aws_iam_role.ecs_task_execution_role.arn
-  depends_on          = [aws_iam_role_policy.ecs_iam_role_policy]   
+#  depends_on          = [aws_iam_role_policy.ecs_iam_role_policy]   
 
   # Configuración del servicio para Fargate
   launch_type = "FARGATE"
