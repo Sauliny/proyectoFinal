@@ -20,7 +20,7 @@ resource "aws_cloudfront_origin_access_control" "OAC_ProyFinal" {
 ## Se configura el aws_cloudfront_distribution ##
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name              = aws_s3_bucket.cf-s3-ProyFinal.bucket_regional_domain_name
+    domain_name              = aws_s3_bucket.cf-s3-proyfinal.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.OAC_ProyFinal.id
     origin_id                = local.s3_origin_id
   }

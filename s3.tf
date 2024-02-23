@@ -3,8 +3,8 @@
 ###########################################
 
 ## Se configura el bucket s3 para Cloudfront en AWS
-resource "aws_s3_bucket" "cf-s3-ProyFinal" {
-  bucket = "cfs3bucketProyFinal"
+resource "aws_s3_bucket" "cf-s3-proyfinal" {
+  bucket = "cfs3bucket-proyfinal"
 
   tags = {
     Name        = "cf-s3-bucket-ProyFinal"
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "cf-s3-ProyFinal" {
 
 ## Se configura el acl del bucket s3 para Cloudfront en AWS
 resource "aws_s3_bucket_acl" "cf-s3-acl-ProyFinal" {
-  bucket = aws_s3_bucket.cf-s3-ProyFinal.id
+  bucket = aws_s3_bucket.cf-s3-proyfinal.id
   acl    = "private"
 }
 
