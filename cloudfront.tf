@@ -2,10 +2,20 @@
 ## Archivo de configuración de AWS CLoudfront Distribution ##
 #############################################################
 
+## Se configura el Origin Access Control ##
+resource "aws_cloudfront_origin_access_control" "OAC_ProyFinal" {
+  name                              = "OAC_ProyFinal"
+  description                       = "Politica OAC_ProyFinal"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+
+## Se configura el aws_cloudfront_distribution ##
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.cf-s3-ProyFinal.bucket_regional_domain_name
-    origin_access_control_id = aws_cloudfront_origin_access_control.default.id
+    origin_access_control_id = aws_cloudfront_origin_access_control.OAC_ProyFinal.id
     origin_id                = local.s3_origin_id
   }
 

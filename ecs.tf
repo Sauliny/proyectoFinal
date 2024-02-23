@@ -4,6 +4,7 @@
 ## ecs.tf                                                 ##
 ############################################################
 
+## Se configura el Cluster ECS
 resource "aws_ecs_cluster" "ecsProyFinal" {
   name = "cluster-ecs-ProyFinal"
   tags = {
@@ -12,7 +13,7 @@ resource "aws_ecs_cluster" "ecsProyFinal" {
 }
 
 
-## Configurar Tarea para ECS
+## Se configura la Tarea para ECS
 resource "aws_ecs_task_definition" "taskECSproyFinal" {
   family             = "taskECSproyFinal"
 #  task_role_arn      = aws_iam_role.ecs_task_role.arn
@@ -33,7 +34,7 @@ resource "aws_ecs_task_definition" "taskECSproyFinal" {
   }])
 }
 
-## Configurar Servicio para ECS
+## Se configura el  Servicio para ECS
 resource "aws_ecs_service" "srvECSproyFinal" {
   name            = "srvECSproyFinal"
   cluster         = aws_ecs_cluster.ecsProyFinal.id
@@ -47,6 +48,3 @@ resource "aws_ecs_service" "srvECSproyFinal" {
     ignore_changes = [desired_count]
   }
 }
-
-
-
