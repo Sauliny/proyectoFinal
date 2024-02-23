@@ -1,6 +1,7 @@
 #############################################
 # Pipeline para ejecutar el Terraform Plan ##
 #############################################
+
 name: pipeline_TerraPlan_proyFinal
 on:
     pull_request:
