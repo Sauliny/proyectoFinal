@@ -48,7 +48,7 @@ resource "aws_ecs_service" "srvECSproyFinal" {
    # Configuración de red
   network_configuration {
     security_groups   = [aws_security_group.ecs_sg_ProyFinal.id]
-    subnets           = ["aws_subnet.subnetProyFinal1.id" , "aws_subnet.subnetProyFinal2.id"]
+    subnets           = ["aws_subnet.subnetproyfinal1.id" , "aws_subnet.subnetproyfinal2.id"]
     assign_public_ip  = true
   }
   lifecycle {
