@@ -9,6 +9,8 @@ on:
         branches:
             - main # para hacer pull request a la rama main
 
+    workflow_dispatch:
+
 jobs:
     jobTerra:
         runs-on: ubuntu-latest
