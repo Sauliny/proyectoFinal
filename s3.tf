@@ -14,9 +14,36 @@ resource "aws_s3_bucket" "cf-s3-proyfinal" {
 
 ## Se configura el aws_s3_bucket_policy para Cloudfront en AWS
 
-resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
-  bucket = aws_s3_bucket.example.id
+resource "aws_s3_bucket_policy" "bucket_policy_py" {
+  bucket = aws_s3_bucket.cf-s3-proyfinal.id
   policy = data.aws_iam_policy_document.s3_bucket_policy.json
+}
+
+## Revisar este codigo: DATA
+data "aws_iam_policy_document" "coe_s3_web_component_virginia" {
+  policy_id = "PolicyForCloudFrontPrivateContent"
+  version   = "2008-10-17"
+  statement {
+    sid     = "AllowCloudFrontServicePrincipal"
+    effect  = "Allow"
+    actions = ["s3:GetObject"]
+
+    resources = [
+      "${aws_s3_bucket.cf-s3-proyfinal.arn}/*",
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+
+      values = [aws_cloudfront_distribution.s3_distribution.arn]
+    }
+
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+  }
 }
 
 
