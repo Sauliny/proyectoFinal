@@ -1,12 +1,13 @@
-#############################################
-# Pipeline para ejecutar el Terraform Plan ##
-#############################################
+##############################################
+# Pipeline para ejecutar el Terraform Apply ##
+##############################################
 
-name: pipeline_TerraPlan_proyFinal
+# Pipeline para probar la configuracion de Recursos, los secretos, Push y Apply en AWS para el Proyecto Final.
+name: pipelineTerraApply
 on:
-    pull_request:
+    push:
         branches:
-            - main     # Se configura asi para hacer pull request a la rama main
+            - main # para hacer pull request a la rama main
 
 jobs:
     jobTerra:
@@ -22,4 +23,4 @@ jobs:
         - name: ejecutar #  Comandos para ejecutar de Terraform
           run: |
                 terraform init  
-                terraform plan
+                terraform apply -auto-approve
