@@ -2,6 +2,12 @@
 ## Archivo de configuración de AWS CLoudfront Distribution ##
 #############################################################
 
+## Se configura el Origin Access Identity ##
+resource "aws_cloudfront_origin_access_identity" "OAI_ProyFinal" {
+  comment = "OAI ProyFinal SE"
+}
+
+
 ## Se configura el Origin Access Control ##
 resource "aws_cloudfront_origin_access_control" "OAC_ProyFinal" {
   name                              = "OAC_ProyFinal"
