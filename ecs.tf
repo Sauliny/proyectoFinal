@@ -14,7 +14,7 @@ resource "aws_ecs_cluster" "ecsProyFinal" {
 
 
 ## Se configura la Tarea para ECS
-resource "aws_ecs_task_definition" "taskECSproyFinal" {
+resource "aws_ecs_task_definition" "task-ecs-proyfinal" {
   family                    = "taskECSproyFinal"
   network_mode              = "awsvpc"
   cpu                       = "256" # Cantidad de CPU en milicore
@@ -39,10 +39,10 @@ resource "aws_ecs_task_definition" "taskECSproyFinal" {
 }
 
 ## Se configura el Servicio para ECS
-resource "aws_ecs_service" "srvECSproyFinal" {
+resource "aws_ecs_service" "srv-ecs-proyfinal" {
   name            = "srvECSproyFinal"
   cluster         = aws_ecs_cluster.ecsProyFinal.id
-  task_definition = aws_ecs_task_definition.taskECSproyFinal.arn
+  task_definition = aws_ecs_task_definition.task-ecs-proyfinal.arn
   desired_count   = 2   # cantidad de instancias para ejecutar
 
   # Configuración del servicio para Fargate
