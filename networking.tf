@@ -12,7 +12,7 @@ resource "aws_vpc" "vpcProyFinal" {
 }
 
 ## Creación de Subred1 en AWS para el Proyecto Final
-resource "aws_subnet" "subnetProyFinal1" {
+resource "aws_subnet" "subnetproyfinal1" {
   vpc_id                  = aws_vpc.vpcProyFinal.id
   cidr_block              = "40.0.0.0/28"
   availability_zone       = "us-east-1a"
@@ -22,7 +22,7 @@ resource "aws_subnet" "subnetProyFinal1" {
 }
 
 ## Creación de Subred2 en AWS para el Proyecto Final
-resource "aws_subnet" "subnetProyFinal2" {
+resource "aws_subnet" "subnetproyfinal2" {
   vpc_id                  = aws_vpc.vpcProyFinal.id
   cidr_block              = "40.0.0.16/28"
   availability_zone       = "us-east-1b"
