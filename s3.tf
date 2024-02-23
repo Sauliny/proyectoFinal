@@ -10,3 +10,11 @@ resource "aws_s3_bucket" "cf-s3-ProyFinal" {
     Environment = "Test Saulo"
   }
 }
+
+resource "aws_s3_bucket_acl" "cf-s3-acl-ProyFinal" {
+  bucket = aws_s3_bucket.cf-s3-ProyFinal.id
+  acl    = "private"
+}
+locals {
+  s3_origin_id = "myS3Origin"
+}
