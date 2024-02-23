@@ -20,7 +20,8 @@ resource "aws_ecs_task_definition" "task-ecs-proyfinal" {
   cpu                       = "256" # Cantidad de CPU en milicore
   memory                    = "512" # Cantidad de memoria en MiB
   requires_compatibilities  = ["FARGATE"]
-  execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+# execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn = "arn:aws:iam::708734958673:role/role-name"
   container_definitions = jsonencode([
   {
     name          = "conteinerProyFinal"
