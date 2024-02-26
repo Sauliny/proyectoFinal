@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "cf-s3-proyfinal" {
 
 # resource "aws_s3_bucket_policy" "bucket_policy_py" {
 #   bucket = aws_s3_bucket.cf-s3-proyfinal.id
-#   policy = data.aws_iam_policy_document.policy_docu_pf.json
+#   policy = aws_iam_policy_document.policy_docu_pf.json
 # }
 
 /*
