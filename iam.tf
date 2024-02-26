@@ -35,7 +35,8 @@ data "aws_iam_policy_document" "policy_docu_pf" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values = [aws_cloudfront_distribution.s3_distribution.arn]
+      values = "arn:aws:cloudfront::708734958673:distribution/E7V8IIOARGCPW"
+#     values = [aws_cloudfront_distribution.s3_distribution.arn]
     }
     principals {
       type        = "Service"
