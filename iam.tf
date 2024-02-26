@@ -1,7 +1,7 @@
 ############################################
 ## Archivo de configuración de IAM Policy ##
 ############################################
-
+/*
 # Se crea IAM Policy Global
 data "aws_iam_policy_document" "s3_iam_policy_ProyFinal" {
   statement {
@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "s3_iam_policy_ProyFinal" {
     }
   }
 }
-
+*/
 # Se crea IAM Policy para Bucket
 resource "aws_s3_bucket_policy" "s3_bucket_policy_ProyFinal" {
   bucket = aws_s3_bucket.cf-s3-proyfinal.id
