@@ -27,18 +27,12 @@ data "aws_iam_policy_document" "policy_docu_pf" {
     sid     = "AllowCloudFrontServicePrincipal"
     effect  = "Allow"
     actions = ["s3:GetObject"]
-
-    resources = [
-      "${aws_s3_bucket.cf-s3-proyfinal.arn}/*",
-    ]
-
+    resources = ["${aws_s3_bucket.cf-s3-proyfinal.arn}/*"]
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-
       values = [aws_cloudfront_distribution.s3_distribution.arn]
     }
-
     principals {
       type        = "Service"
       identifiers = ["cloudfront.amazonaws.com"]
@@ -50,11 +44,16 @@ data "aws_iam_policy_document" "policy_docu_pf" {
 ## Se configura el acl del bucket s3 para Cloudfront en AWS
 
 resource "aws_s3_bucket_acl" "cf-s3-acl-ProyFinal" {
-#  depends_on = [aws_s3_bucket_ownership_controls.bucket_controls_pf]
   bucket = aws_s3_bucket.cf-s3-proyfinal.id
   acl    = "private"
 }
-
+resource "aws_s3_bucket_public_access_block" "public_access_block_aws_s3" {
+  bucket = aws_s3_bucket.public_access_block_aws_s3.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
 
 ## Se configura el origin para Cloudfront en AWS
 locals {
