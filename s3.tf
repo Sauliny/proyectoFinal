@@ -48,7 +48,7 @@ resource "aws_s3_bucket_acl" "cf-s3-acl-ProyFinal" {
   acl    = "private"
 }
 resource "aws_s3_bucket_public_access_block" "public_access_block_aws_s3" {
-  bucket = aws_s3_bucket.public_access_block_aws_s3.id
+  bucket = aws_s3_bucket.cf-s3-proyfinal.id
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true
