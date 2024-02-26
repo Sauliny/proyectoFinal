@@ -12,6 +12,11 @@ resource "aws_ecs_cluster" "ecsProyFinal" {
   }
 }
 
+resource "aws_ecs_cluster_capacity_providers" "project-clustercp" {
+  cluster_name       = aws_ecs_cluster.ecsProyFinal.name
+  capacity_providers = ["FARGATE"]
+  depends_on         = [aws_ecs_cluster.ecsProyFinal]
+}
 
 ## Se configura la Tarea para ECS
 resource "aws_ecs_task_definition" "task-ecs-proyfinal" {
@@ -21,6 +26,7 @@ resource "aws_ecs_task_definition" "task-ecs-proyfinal" {
   memory                    = "512" # Cantidad de memoria en MiB
   requires_compatibilities  = ["FARGATE"]
 # execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
+# task_role_arn            = data.aws_iam_role.ecs_task_execution_role.arn
   execution_role_arn = "arn:aws:iam::708734958673:role/role-name"
   container_definitions = jsonencode([
   {
@@ -45,7 +51,7 @@ resource "aws_ecs_service" "srv-ecs-proyfinal" {
   cluster             = aws_ecs_cluster.ecsProyFinal.id
   task_definition     = aws_ecs_task_definition.task-ecs-proyfinal.arn
   desired_count       = 2   # cantidad de instancias para ejecutar
-  iam_role            = aws_iam_role.ecs_task_execution_role.arn
+#  iam_role            = aws_iam_role.ecs_task_execution_role.arn
 #  depends_on          = [aws_iam_role_policy.ecs_iam_role_policy]   
 
   # Configuración del servicio para Fargate
