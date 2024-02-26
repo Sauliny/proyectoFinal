@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "s3_iam_policy_ProyFinal" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = [aws_cloudfront_distribution.my_distrib.arn]
+      values   = [aws_cloudfront_distribution.s3_distribution.arn]
     }
   }
 }
