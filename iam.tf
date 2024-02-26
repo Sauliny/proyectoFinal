@@ -23,6 +23,27 @@ data "aws_iam_policy_document" "s3_iam_policy_ProyFinal" {
   }
 }
 */
+
+data "aws_iam_policy_document" "policy_docu_pf" {
+  policy_id = "PolicyForCloudFrontPrivateContent"
+  version   = "2008-10-17"
+  statement {
+    sid     = "AllowCloudFrontServicePrincipal"
+    effect  = "Allow"
+    actions = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.cf-s3-proyfinal.arn}/*"]
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values = [aws_cloudfront_distribution.s3_distribution.arn]
+    }
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+  }
+}
+
 # Se crea IAM Policy para Bucket
 resource "aws_s3_bucket_policy" "s3_bucket_policy_ProyFinal" {
   bucket = aws_s3_bucket.cf-s3-proyfinal.id
