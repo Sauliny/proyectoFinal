@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "policy_docu_pf" {
 
 ## Se configura el acl del bucket s3 para Cloudfront en AWS
 
-resource "aws_s3_bucket_acl" "cf-s3-acl-ProyFinal" {
+resource "aws_s3_bucket_acl" "cf-s3-acl-proyfinal" {
   bucket = aws_s3_bucket.cf-s3-proyfinal.id
   acl    = "private"
 }
