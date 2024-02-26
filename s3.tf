@@ -5,7 +5,6 @@
 ## Se configura el bucket s3 para Cloudfront en AWS
 resource "aws_s3_bucket" "cf-s3-proyfinal" {
   bucket = "cfs3bucket-proyfinal"
-
   tags = {
     Name        = "cf-s3-bucket-ProyFinal"
     Environment = "Test Saulo"
@@ -42,8 +41,17 @@ data "aws_iam_policy_document" "policy_docu_pf" {
 }
 */
 
+## Se configura el aws_s3_bucket_ownership_controls
+resource "aws_s3_bucket_ownership_controls" "bucket_owner_py" {
+  bucket = aws_s3_bucket.cf-s3-proyfinal.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 ## Se configura el acl del bucket s3 para Cloudfront en AWS
 resource "aws_s3_bucket_acl" "cf-s3-acl-proyfinal" {
+  depends_on = [aws_s3_bucket_ownership_controls.bucket_owner_py]
   bucket = aws_s3_bucket.cf-s3-proyfinal.id
   acl    = "private"
 }
