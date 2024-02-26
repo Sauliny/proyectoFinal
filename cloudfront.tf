@@ -25,9 +25,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_id                = local.s3_origin_id
   }
   enabled             = true
-  is_ipv6_enabled     = true
-  comment             = "Some comment"
-  default_root_object = "index.html" 
+#  is_ipv6_enabled     = true
+#  comment             = "Some comment"
+#  default_root_object = "index.html" 
 
 #  logging_config {
 #    include_cookies = false
@@ -35,14 +35,13 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 #    prefix          = "myprefix"
 #  }
   
-  aliases = []
+#  aliases = []
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
     forwarded_values {
       query_string = false
-
       cookies {
         forward = "none"
       }
@@ -52,7 +51,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     default_ttl            = 3600
     max_ttl                = 86400
   }
-
+/*
   # Cache behavior with precedence 0
   ordered_cache_behavior {
     path_pattern     = "/content/immutable/*"
@@ -110,7 +109,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   tags = {
     Environment = "Test Saulo"
   }
-
+*/
   viewer_certificate {
     cloudfront_default_certificate = true
   }
