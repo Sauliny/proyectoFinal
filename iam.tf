@@ -7,18 +7,10 @@ data "aws_iam_policy_document" "s3_iam_policy_ProyFinal" {
   statement {
     actions   = ["s3:GetObject"]
     resources = ["${aws_s3_bucket.cf-s3-proyfinal.arn}/*"]
-#    principals {
-#      type        = "AWS"
-#      identifiers = [aws_cloudfront_origin_access_identity.OAI_ProyFinal.iam_arn]
-#    }
+
     principals {
-      type        = "Service"
-      identifiers = ["cloudfront.amazonaws.com"]
-    }
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceArn"
-      values   = [aws_cloudfront_distribution.my_distrib.arn]
+      type        = "AWS"
+      identifiers = [aws_cloudfront_origin_access_identity.OAI_ProyFinal.iam_arn]
     }
   }
 }
