@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "s3_iam_policy_ProyFinal" {
 # Se crea IAM Policy para Bucket
 resource "aws_s3_bucket_policy" "s3_bucket_policy_ProyFinal" {
   bucket = aws_s3_bucket.cf-s3-proyfinal.id
-  policy = data.aws_iam_policy_document.policy_docu_pf.json
+  policy = aws_iam_policy_document.policy_docu_pf.json
   #policy = data.aws_iam_policy_document.s3_iam_policy_ProyFinal.json
 }
 
