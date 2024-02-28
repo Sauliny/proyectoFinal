@@ -67,19 +67,37 @@ resource "aws_security_group" "ecs_sg_ProyFinal" {
   description = "Allow all traffic within the VPC"
   vpc_id      = aws_vpc.vpcProyFinal.id
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Acceso de trafico desde cualquier IP
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    security_groups = [aws_security_group.lb_sg_ProyFinal.id] # Acceso de trafico desde un security group
   }
-  /*
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-*/  
+}
+
+
+## Creación de Grupo de Seguridad en AWS para el Load Balancer Proyecto Final
+resource "aws_security_group" "lb_sg_ProyFinal" {
+  name_prefix = "lb_sg_ProyFinal"
+  description = "Allow all traffic within the VPC"
+  vpc_id      = aws_vpc.vpcProyFinal.id
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Acceso de trafico desde cualquier IP
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 ## Creación de Balanceador de Carga en AWS para el Proyecto Final
@@ -88,7 +106,8 @@ resource "aws_lb" "lb-proyfinal" {
   internal           = false
   load_balancer_type = "application"
   subnets            = [aws_subnet.subnetproyfinal1.id,aws_subnet.subnetproyfinal2.id]
-  security_groups    = [aws_security_group.ecs_sg_ProyFinal.id]
+##  security_groups    = [aws_security_group.ecs_sg_ProyFinal.id]  ## Se realiza ajuste para el SG del Load Balancer
+  security_groups    = [aws_security_group.lb_sg_ProyFinal.id]
   enable_deletion_protection = false
     tags = {
     Environment = "Test Saulo"
