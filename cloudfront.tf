@@ -25,6 +25,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_id                = local.s3_origin_id
   }
   enabled             = true
+  default_root_object = "index.html"
 #  is_ipv6_enabled     = true
 #  comment             = "Some comment"
 #  default_root_object = "index.html" 
